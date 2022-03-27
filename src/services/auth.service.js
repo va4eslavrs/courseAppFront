@@ -7,9 +7,9 @@ const register = (username, email, password) => {
     password,
   });
 };
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
-    .post(ServerHosts.apiAuthLogin(), { username, password })
+    .post(ServerHosts.apiAuthLogin(), { email, password })
     .then((response) => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));

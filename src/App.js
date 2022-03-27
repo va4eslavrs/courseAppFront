@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import Profile from "./components/Profile";
 import UserBoard from "./components/UserBoard";
 import AdminBoard from "./components/AdminBoard";
+import GetTools from "./components/CreatePost";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -56,7 +57,7 @@ const App = () => {
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {currentUsr.email}
+                {currentUsr.name}
               </Link>
             </li>
             <li className="nav-item">
@@ -85,7 +86,7 @@ const App = () => {
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path={"/login"} component={Login} />
           <Route exact path={"/register"} component={Register} />
-          <Route exact path={"/profile"} component={Profile} />
+          <Route exact path={"/profile"} component={GetTools} />
           <Route exact path={"/user"} component={UserBoard} />
           <Route exact path={"/admin"} component={AdminBoard} />
         </Switch>
