@@ -129,6 +129,8 @@ const CreatePost = (props) => {
   const handleCreation = (e) => {
     e.preventDefault();
     Service.add(text, tags, photos, theme, topicvalue);
+    props.history.push("/");
+    window.location.reload();
   };
 
   return (

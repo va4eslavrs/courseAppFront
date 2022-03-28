@@ -21,7 +21,13 @@ const add = (text, tags, photos, theme, topic) => {
     { headers: authHeader() }
   );
 };
-const privateContent = () => {};
+const privateContent = () => {
+  return axios
+    .get(ServerHosts.apiInfoPrivate(), { headers: authHeader() })
+    .then((response) => {
+      return response.data;
+    });
+};
 const login = (email, password) => {
   return axios
     .post(ServerHosts.apiAuthLogin(), { email, password })
@@ -39,6 +45,7 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 export default {
+  privateContent,
   add,
   register,
   login,

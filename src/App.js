@@ -4,6 +4,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import AuthService from "./services/auth.service";
 import Home from "./components/Home";
+import HomePublicPrivate from "./components/HomePublicPrivate";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import UserBoard from "./components/UserBoard";
@@ -82,7 +83,11 @@ const App = () => {
       </nav>
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/home"]} component={Home} />
+          <Route
+            exact
+            path={["/", "/home"]}
+            component={localStorage.getItem("user") ? HomePublicPrivate : Home}
+          />
           <Route exact path={"/login"} component={Login} />
           <Route exact path={"/register"} component={Register} />
           <Route exact path={"/create"} component={CreatePost} />
