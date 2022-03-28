@@ -1,5 +1,6 @@
 import axios from "axios";
 import ServerHosts from "../serverhosts";
+import authHeader from "../services/auth-header";
 const register = (username, email, password) => {
   return axios.post(ServerHosts.apiAuthRegister(), {
     username,
@@ -7,6 +8,20 @@ const register = (username, email, password) => {
     password,
   });
 };
+const add = (text, tags, photos, theme, topic) => {
+  return axios.post(
+    ServerHosts.apiInfoAdd(),
+    {
+      text,
+      tags,
+      photos,
+      theme,
+      topic,
+    },
+    { headers: authHeader() }
+  );
+};
+const privateContent = () => {};
 const login = (email, password) => {
   return axios
     .post(ServerHosts.apiAuthLogin(), { email, password })
@@ -24,6 +39,7 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 export default {
+  add,
   register,
   login,
   logout,
