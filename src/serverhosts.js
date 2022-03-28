@@ -1,6 +1,6 @@
 const host = () => {
-  return "http://localhost:8083/";
-  // return "https://hidden-brook-67114.herokuapp.com/";
+  //return "http://localhost:8083/";
+  return "https://hidden-brook-67114.herokuapp.com/";
 };
 const all = () => {
   return apiTest() + "all";
