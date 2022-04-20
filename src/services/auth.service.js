@@ -21,6 +21,9 @@ const add = (text, tags, photos, theme, topic) => {
     { headers: authHeader() }
   );
 };
+const del = (id) => {
+  return axios.post(ServerHosts.apiInfoDelete());
+};
 const privateContent = () => {
   return axios
     .get(ServerHosts.apiInfoPrivate(), { headers: authHeader() })

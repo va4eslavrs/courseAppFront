@@ -4,7 +4,6 @@ import ServerHost from "../serverhosts";
 import authHeader from "../services/auth-header";
 
 export default function ContentComponent() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [content, setContent] = useState([
     {
       publicPostsResponse: {
@@ -22,6 +21,10 @@ export default function ContentComponent() {
       owner: false,
     },
   ]);
+  const deletion = (index) => {
+    const id = content[index].id;
+  };
+
   useEffect(() => {
     axios
       .get(ServerHost.apiInfoPrivate(), {
@@ -29,7 +32,6 @@ export default function ContentComponent() {
       })
       .then(
         (response) => {
-          setIsLoaded(true);
           setContent(response.data);
         },
         (err) => {
@@ -53,7 +55,10 @@ export default function ContentComponent() {
                 <div className="form-control">
                   <div>
                     <div></div>
-                    <div>топик {item.publicPostsResponse.topic}</div>
+                    <div>
+                      <h4> {item.publicPostsResponse.topic}</h4>
+                      <div>раздел: {item.publicPostsResponse.theme}</div>
+                    </div>
                     <div>
                       <div>
                         {item.publicPostsResponse.photos.length > 0 &&
@@ -61,9 +66,28 @@ export default function ContentComponent() {
                             <img key={num} src={photo.thumb} />
                           ))}
                       </div>
-                      <h4>тема {item.publicPostsResponse.theme}</h4>
                     </div>
                     <div key={index}>{item.publicPostsResponse.text}</div>
+                    {item.owner && (
+                      <div>
+                        <button
+                          className="btn btn-outline-dark btn-sm"
+                          onClick={(e) => {
+                            e.target.parentElement.parentElement.style.display =
+                              "none";
+                            deletion(index);
+                          }}
+                        >
+                          delete
+                        </button>
+                        <button
+                          className="btn btn-outline-dark btn-sm"
+                          key={index}
+                        >
+                          edit
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
