@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ServerHost from "../serverhosts";
 import authHeader from "../services/auth-header";
+import authService from "../services/auth.service";
 
 export default function ContentComponent() {
   const [content, setContent] = useState([
@@ -22,7 +23,11 @@ export default function ContentComponent() {
     },
   ]);
   const deletion = (index) => {
-    const id = content[index].id;
+    console.log("index: " + index);
+
+    const id = content[index].publicPostsResponse.id;
+    console.log("id from deletion: " + id);
+    authService.del(id);
   };
 
   useEffect(() => {
@@ -73,7 +78,7 @@ export default function ContentComponent() {
                         <button
                           className="btn btn-outline-dark btn-sm"
                           onClick={(e) => {
-                            e.target.parentElement.parentElement.style.display =
+                            e.target.parentElement.parentElement.parentElement.style.display =
                               "none";
                             deletion(index);
                           }}

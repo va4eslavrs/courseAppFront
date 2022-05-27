@@ -22,7 +22,17 @@ const add = (text, tags, photos, theme, topic) => {
   );
 };
 const del = (id) => {
-  return axios.post(ServerHosts.apiInfoDelete());
+  const author = getCurrentUser().id;
+  console.log(author);
+  console.log(id);
+  return axios.post(
+    ServerHosts.apiInfoDelete(),
+    {
+      id,
+      author,
+    },
+    { headers: authHeader() }
+  );
 };
 const privateContent = () => {
   return axios
@@ -50,6 +60,7 @@ const getCurrentUser = () => {
 export default {
   privateContent,
   add,
+  del,
   register,
   login,
   logout,
